@@ -5,7 +5,9 @@
         <group>
             <file>file:/C:/workspace/anivation/src/view/FXMLDocument.fxml</file>
             <file>file:/C:/workspace/anivation/src/controller/FXMLDocumentController.java</file>
+            <file>file:/C:/workspace/anivation/src/DAO/DAOConnection.java</file>
             <file>file:/C:/workspace/anivation/src/Main.java</file>
+            <file>file:/C:/workspace/anivation/src/DAO/RepositoryDAO.java</file>
         </group>
     </open-files>
 </project-private>

@@ -17,12 +17,15 @@ import javafx.scene.layout.Pane;
 import static javafx.scene.paint.Color.BLUE;
 import static javafx.scene.paint.Color.ORANGE;
 import static javafx.scene.paint.Color.PURPLE;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Administrador
  */
-public class FXMLDocumentController implements Initializable {
+public class FXMLDocumentController extends DAO.DAOConnection implements Initializable {
 
     @FXML
     private Label lblAnimes;
@@ -45,9 +48,23 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button btnFetchAnime;
 
+    Connection conn = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver"); 
+            //BD_URL = "jdbc:mysql://localhost:port/bd_name?useTimezone=true&serverTimezone=UTC;;;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public FXMLDocumentController() throws ClassNotFoundException {
+        conn = getConnection();
+        System.out.println("conn" + conn);
     }
 
     @FXML
@@ -85,7 +102,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void actionSearchAnime() {
-        
+
     }
 
 }
