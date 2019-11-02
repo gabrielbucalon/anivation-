@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLCadastroUsuarioController">
+   <children>
+      <DialogPane layoutX="45.0" layoutY="40.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="510.0" />
+      <Label layoutX="222.0" layoutY="68.0" text="Novo Usuario">
+         <font>
+            <Font name="Arial Bold" size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txt_NomeCompleto" layoutX="72.0" layoutY="153.0" prefHeight="34.0" prefWidth="456.0" promptText="NOME COMPLETO" />
+      <TextField fx:id="txt_Apelido" layoutX="72.0" layoutY="211.0" prefHeight="34.0" prefWidth="456.0" promptText="APELIDO (LOGIN)" />
+      <TextField fx:id="txt_Email" layoutX="72.0" layoutY="270.0" prefHeight="34.0" prefWidth="456.0" promptText="EMAIL" />
+      <PasswordField fx:id="txt_Senha" layoutX="72.0" layoutY="330.0" prefHeight="34.0" prefWidth="456.0" promptText="SENHA" />
+      <DatePicker fx:id="drop_Data" layoutX="71.0" layoutY="394.0" prefHeight="34.0" prefWidth="456.0" promptText="DATA DE NASCIMENTO" />
+      <Button fx:id="btn_Cancelar" layoutX="71.0" layoutY="498.0" mnemonicParsing="false" onAction="#btnCancelarCadastro" prefHeight="34.0" prefWidth="101.0" style="-fx-background-color: #FF4500;" text="CANCELAR" textFill="WHITE" />
+      <Button fx:id="btnEnviarCadastro" layoutX="426.0" layoutY="498.0" mnemonicParsing="false" onAction="#btnEnviarCadastro" prefHeight="34.0" prefWidth="101.0" style="-fx-background-color: #37b741;" text="ENVIAR" textFill="WHITE">
+</Button>
+   </children>
+</AnchorPane>
