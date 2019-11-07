@@ -5,18 +5,18 @@
  */
 package DAO;
 
-import java.sql.Connection;
+import java.sql.ResultSet;
 
 /**
  *
  * @author Administrador
  */
-public interface RepositoryDAO {
+public interface AnimeSeriesDAO {
 
     /**
      *
+     * @param nameTable
      * @return
      */
-    //public Connection getConnection();
-    public void getInfTables(String nameTable);
+    public ResultSet getInfTables(String nameTable);
 }

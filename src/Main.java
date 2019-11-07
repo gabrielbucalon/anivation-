@@ -15,7 +15,7 @@ import javafx.stage.StageStyle;
 
 /**
  *
- * @author Administrador
+ * @author Gabriel Bucalon
  */
 public class Main extends Application {
        //define your offsets here
