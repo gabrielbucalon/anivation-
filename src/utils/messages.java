@@ -12,5 +12,5 @@ package utils;
 public interface messages {
     public void infoBox(String infoMessage, String titleBar, String headerMessage);
     
-    public void infoBoxError(String infoMessage, String titleBar, String headerMessage);
+    public void infoBoxErr(String infoMessage, String titleBar, String headerMessage);
 }

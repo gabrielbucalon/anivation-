@@ -28,6 +28,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.AniSeries;
+import utils.messagesImpl;
 
 /**
  *
@@ -79,7 +80,7 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
     @FXML
     public void onClickEvent(){
         AniSeries a = table.getSelectionModel().getSelectedItem();
-        System.out.println(a.getIdAniSeries() + "+ " + a.getSeriesName());
+        messagesImpl.infoBox(null, "Informações do Anime/Mangá","Nome anime : " + a.getSeriesName() + "" + "Nota do Anime : " + a.getSeriesNote());
     }
 
     public void getAni(ResultSet rs) {
@@ -98,7 +99,7 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
         seriesName.setCellValueFactory(new PropertyValueFactory<>("seriesName"));
         seriesNote.setCellValueFactory(new PropertyValueFactory<>("seriesNote"));
         table.setItems(list);
-
+        
     }
 
     @FXML
