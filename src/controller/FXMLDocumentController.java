@@ -44,14 +44,6 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
     @FXML
     private Pane panelAllAnimes;
     @FXML
-    private Pane searchAnime;
-    @FXML
-    private Button btnAllAnimes;
-    @FXML
-    private Button btnSearchAnime;
-    @FXML
-    private Button btnBestAnimes;
-    @FXML
     private TextField txtSearchAnime;
     @FXML
     private Button btnFetchAnime;
@@ -86,11 +78,8 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
     
     @FXML
     public void onClickEvent(){
-        
-    AniSeries p =    table.getSelectionModel().getSelectedItem();
-    System.out.println(p.getIdAniSeries() + "+ " + p.getSeriesName());
-    
-     //System.out.println(this.table.getItems().get(3).getSeriesName());
+        AniSeries a = table.getSelectionModel().getSelectedItem();
+        System.out.println(a.getIdAniSeries() + "+ " + a.getSeriesName());
     }
 
     public void getAni(ResultSet rs) {
