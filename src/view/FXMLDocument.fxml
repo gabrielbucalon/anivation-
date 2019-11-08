@@ -15,18 +15,18 @@
             <children>
                 <Pane fx:id="paneSearchAnimes" layoutX="195.0" layoutY="40.0" prefHeight="11.0" prefWidth="134.0" style="-fx-background-color: #f3f3f3;" />
                 <Pane fx:id="panelBestAnimes" layoutX="359.0" layoutY="39.0" prefHeight="11.0" prefWidth="134.0" style="-fx-background-color: #f3f3f3;" />
-                <Button fx:id="btnSearchAnime" layoutX="195.0" layoutY="19.0" mnemonicParsing="false" onAction="#actionSearchAnimes" prefHeight="25.0" prefWidth="134.0" text="Buscar Anime" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
+                <Button fx:id="btnSearchAnime" layoutX="195.0" layoutY="12.0" mnemonicParsing="false" onAction="#actionSearchAnimes" prefHeight="25.0" prefWidth="134.0" stylesheets="@../theme/style.css" text="Buscar Anime" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
                     <font>
                         <Font name="Segoe UI" size="12.0" />
                     </font>
                 </Button>
-                <Button fx:id="btnBestAnimes" layoutX="359.0" layoutY="19.0" mnemonicParsing="false" onAction="#actionBestAnimes" prefHeight="25.0" prefWidth="134.0" text="Melhores Animes" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
+                <Button fx:id="btnBestAnimes" layoutX="359.0" layoutY="12.0" mnemonicParsing="false" onAction="#actionBestAnimes" prefHeight="25.0" prefWidth="134.0" stylesheets="@../theme/style.css" text="Melhores Animes" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
                     <font>
                         <Font name="Segoe UI" size="12.0" />
                     </font>
                 </Button>
                 <Pane fx:id="panelAllAnimes" layoutX="33.0" layoutY="40.0" prefHeight="11.0" prefWidth="134.0" style="-fx-background-color: #6572bc;" />
-                <Button id="button" fx:id="btnAllAnimes" layoutX="33.0" layoutY="19.0" mnemonicParsing="false" onAction="#actionBtnAllAnimes" prefHeight="25.0" prefWidth="134.0" stylesheets="@../theme/style.css" text="Todos Animes" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
+                <Button id="button" fx:id="btnAllAnimes" layoutX="33.0" layoutY="12.0" mnemonicParsing="false" onAction="#actionBtnAllAnimes" prefHeight="25.0" prefWidth="134.0" stylesheets="@../theme/style.css" text="Todos Animes" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
                     <font>
                         <Font name="Segoe UI" size="12.0" />
                     </font>

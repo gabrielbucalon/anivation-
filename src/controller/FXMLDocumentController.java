@@ -80,7 +80,7 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
     @FXML
     public void onClickEvent(){
         AniSeries a = table.getSelectionModel().getSelectedItem();
-        messagesImpl.infoBox(null, "Informações do Anime/Mangá","Nome anime : " + a.getSeriesName() + "" + "Nota do Anime : " + a.getSeriesNote());
+        messagesImpl.infoBox(null, "Informações do Anime/Mangá","Nome anime : " + a.getSeriesName() + "\nNota do Anime : " + a.getSeriesNote());
     }
 
     public void getAni(ResultSet rs) {
