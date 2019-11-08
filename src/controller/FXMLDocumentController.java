@@ -7,6 +7,7 @@ package controller;
 
 import DAO.AnimeSeriesDAOImpl;
 import DAO.DAOConnection;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -24,9 +25,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import model.AniSeries;
 import utils.messagesImpl;
 
@@ -49,6 +55,8 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
     @FXML
     private Button btnFetchAnime;
     @FXML
+    private Button btnNewAnime;
+    @FXML
     private TableView<AniSeries> table;
     @FXML
     private TableColumn<AniSeries, String> idAniSeries;
@@ -61,6 +69,9 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
 
     Connection conn = null;
     PreparedStatement preparedStatement = null;
+    
+    Stage dialogStage = new Stage();
+    Scene scene;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -76,11 +87,11 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
         ResultSet rs = getInfTables(_sql);
         getAni(rs);
     }
-    
+
     @FXML
-    public void onClickEvent(){
+    public void onClickEvent() {
         AniSeries a = table.getSelectionModel().getSelectedItem();
-        messagesImpl.infoBox(null, "Informações do Anime/Mangá","Nome anime : " + a.getSeriesName() + "\nNota do Anime : " + a.getSeriesNote());
+        messagesImpl.infoBox(null, "Informações do Anime/Mangá", "Nome anime : " + a.getSeriesName() + "\nNota do Anime : " + a.getSeriesNote());
     }
 
     public void getAni(ResultSet rs) {
@@ -99,7 +110,24 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
         seriesName.setCellValueFactory(new PropertyValueFactory<>("seriesName"));
         seriesNote.setCellValueFactory(new PropertyValueFactory<>("seriesNote"));
         table.setItems(list);
-        
+
+    }
+
+    @FXML
+    private void actionAddAnime(ActionEvent event) throws IOException {
+        System.out.println("a");
+        Node source = (Node) event.getSource(); // Pega o evento do botão
+        System.out.println("aa");
+        dialogStage = (Stage) source.getScene().getWindow();
+        System.out.println("aaaa");
+        dialogStage.close();
+        System.out.println("aaaaaaa");
+        Parent root = FXMLLoader.load(getClass().getResource("../view/FXML_addSeries.fxml"));
+        Scene scene = new Scene (root,350,300);
+        System.out.println("aaaaaaaaaa");
+        dialogStage.setScene(scene);
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        dialogStage.show();
     }
 
     @FXML

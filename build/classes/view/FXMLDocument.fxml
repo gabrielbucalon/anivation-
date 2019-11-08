@@ -43,7 +43,7 @@
                         <TableColumn prefWidth="75.0" text="Ações" />
                     </columns>
                 </TableView>
-                <Button id="btnNewAnime" layoutX="514.0" layoutY="244.0" mnemonicParsing="false" style="-fx-background-radius: 50;" text="+" />
+                <Button fx:id="btnNewAnime" layoutX="514.0" layoutY="244.0" mnemonicParsing="false" onAction="#actionAddAnime" style="-fx-background-radius: 50;" text="+" />
             </children>
         </Pane>
         <Label fx:id="lblAnimes" layoutX="39.0" layoutY="150.0" text="Todos animes" textFill="#6572bc">
