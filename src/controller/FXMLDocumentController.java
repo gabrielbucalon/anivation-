@@ -26,7 +26,6 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
@@ -69,7 +68,7 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
 
     Connection conn = null;
     PreparedStatement preparedStatement = null;
-    
+
     Stage dialogStage = new Stage();
     Scene scene;
 
@@ -113,21 +112,23 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
 
     }
 
+    private void goPageAddAnime(Stage primaryStage) throws IOException {
+        try {
+            primaryStage.close();
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/FXML_addSeries.fxml"));
+            Scene scene = new Scene(root, 600, 600);
+            primaryStage.setScene(scene);
+            primaryStage.show();    
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
     @FXML
-    private void actionAddAnime(ActionEvent event) throws IOException {
-        System.out.println("a");
-        Node source = (Node) event.getSource(); // Pega o evento do botão
-        System.out.println("aa");
-        dialogStage = (Stage) source.getScene().getWindow();
-        System.out.println("aaaa");
+    public void actionAddAnime() throws IOException {
         dialogStage.close();
-        System.out.println("aaaaaaa");
-        Parent root = FXMLLoader.load(getClass().getResource("../view/FXML_addSeries.fxml"));
-        Scene scene = new Scene (root,350,300);
-        System.out.println("aaaaaaaaaa");
-        dialogStage.setScene(scene);
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        dialogStage.show();
+        goPageAddAnime(dialogStage);
     }
 
     @FXML

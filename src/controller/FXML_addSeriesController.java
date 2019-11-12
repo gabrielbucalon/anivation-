@@ -7,21 +7,30 @@ package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
  *
- * @author Administrador
+ * @author Gabriel Bucalon
  */
 public class FXML_addSeriesController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    @FXML
+    private TextField txtSearchtxtAnimeGenre;
+    @FXML
+    private TextField txtAnimeName;
+    @FXML
+    private TextField txtAnimeEpisodes;
+    @FXML
+    private TextField txtAnimeSynopsis;
+    @FXML
+    private TextField txtAnimeComment;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }
