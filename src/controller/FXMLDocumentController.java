@@ -127,7 +127,6 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
 
     @FXML
     public void actionAddAnime() throws IOException {
-        dialogStage.close();
         goPageAddAnime(dialogStage);
     }
 

@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 
 /**
  * FXML Controller class
@@ -25,9 +26,9 @@ public class FXML_addSeriesController implements Initializable {
     @FXML
     private TextField txtAnimeEpisodes;
     @FXML
-    private TextField txtAnimeSynopsis;
+    private TextArea txtAnimeSynopsis;
     @FXML
-    private TextField txtAnimeComment;
+    private TextArea txtAnimeComment;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -45,11 +46,7 @@ public class FXML_addSeriesController implements Initializable {
     
     @FXML
     private void clearFields(){
-        txtAnimeComment.clear();
-        txtAnimeEpisodes.clear();
-        txtAnimeName.clear();
-        txtAnimeSynopsis.clear();
-        txtSearchtxtAnimeGenre.clear();
+       
     }
 
 }
