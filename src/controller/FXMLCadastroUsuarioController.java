@@ -9,7 +9,10 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +26,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.DatePicker;
 import javafx.stage.Stage;
+import sun.security.util.Password;
 
 public class FXMLCadastroUsuarioController extends DAO.DAOConnection implements Initializable {
 
@@ -49,11 +53,11 @@ public class FXMLCadastroUsuarioController extends DAO.DAOConnection implements 
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
 
-    //String nome;
-    //String apelido;
-    //String email;    
-    //String senha;
-    //String data;
+    String nome;
+    String apelido;
+    String email;    
+    String senha;
+    String data;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -82,11 +86,39 @@ public class FXMLCadastroUsuarioController extends DAO.DAOConnection implements 
     
     @FXML
     public void btnEnviarCadastro(ActionEvent event){
-       String nome = txt_NomeCompleto.getText();
-       String senha = txt_senha.getText();
-       String apelido = txt_Apelido.getText();
-       String email = txt_Email.getText();
-       LocalDate data = drop_Data.getValue();
+        nome = txt_NomeCompleto.getText();        
+        apelido = txt_Apelido.getText();
+        email = txt_Email.getText();
+        senha = txt_senha.getText();
+        LocalDate data = drop_Data.getValue();
+        
+        String _sql = "INSERT INTO aniuser(fullname,nicknameUser, email, password) VALUES(?, ?, ?, ?)";
+        
+                    try {
+                preparedStatement = conn.prepareStatement(_sql);
+                preparedStatement.setString(1, nome);
+                preparedStatement.setString(2, apelido);
+                preparedStatement.setString(3, email);
+                preparedStatement.setString(4, senha);
+                //preparedStatement.setString(5, String(data));
+                resultSet = preparedStatement.executeQuery();
+                //Caso ele não encontre o usuario, entrara nessa condição
+                
+                System.out.println("oi");
+                Node source = (Node) event.getSource(); // Pega o evento do botão
+                dialogStage = (Stage) source.getScene().getWindow();
+                dialogStage.close();
+                start(dialogStage);                
+            } catch (Exception err) {
+
+                // messages.infoBoxErr("Não foi possível entrar\nTente novamente", "ERRO!", null);
+                System.out.println("Ops, não deu para logar " + err);
+            }
+       
+        System.out.println(nome);       
+        System.out.println(apelido);
+        System.out.println(email);
+        System.out.println(senha);
         System.out.println(data);
     }
     
