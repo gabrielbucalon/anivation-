@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXML_addSeriesController">
    <children>
       <TextField fx:id="txtAnimeName" layoutX="70.0" layoutY="75.0" prefHeight="26.0" prefWidth="461.0" />
       <Label fx:id="lblTitle1" layoutX="200.0" layoutY="13.0" text="Adicionar Anime">
@@ -48,8 +48,8 @@
             <MenuItem mnemonicParsing="false" text="10" />
         </items>
       </MenuButton>
-      <Button fx:id="btnAnimeSend" layoutX="471.0" layoutY="562.0" mnemonicParsing="false" text="Enviar" />
-      <Button fx:id="btnAnimeCancel" layoutX="388.0" layoutY="562.0" mnemonicParsing="false" text="Cancelar" />
-      <Button fx:id="btnClean" layoutX="69.0" layoutY="562.0" mnemonicParsing="false" text="Limpar" />
+      <Button fx:id="btnAnimeSend" layoutX="471.0" layoutY="562.0" onAction="#createAnime"  mnemonicParsing="false" text="Enviar" />
+      <Button fx:id="btnAnimeCancel" layoutX="388.0" layoutY="562.0" onAction="#backToPage"  mnemonicParsing="false" text="Cancelar" />
+      <Button fx:id="btnClean" layoutX="69.0" layoutY="562.0" mnemonicParsing="false" onAction="#clearFields"  text="Limpar" />
    </children>
 </AnchorPane>

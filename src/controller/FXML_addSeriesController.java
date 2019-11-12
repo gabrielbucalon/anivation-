@@ -32,5 +32,24 @@ public class FXML_addSeriesController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
+    
+    @FXML
+    private void createAnime(){
+        
+    }
+    
+    @FXML
+    private void backToPage(){
+            
+    }
+    
+    @FXML
+    private void clearFields(){
+        txtAnimeComment.clear();
+        txtAnimeEpisodes.clear();
+        txtAnimeName.clear();
+        txtAnimeSynopsis.clear();
+        txtSearchtxtAnimeGenre.clear();
+    }
 
 }
