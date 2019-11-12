@@ -5,6 +5,9 @@
  */
 package controller;
 
+import DAO.AnimeSeriesDAOImpl;
+import DAO.DAOConnection;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -20,12 +23,24 @@ import static javafx.scene.paint.Color.PURPLE;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import model.AniSeries;
+import utils.messagesImpl;
 
 /**
  *
- * @author Administrador
+ * @author Gabriel Bucalon
  */
-public class FXMLDocumentController extends DAO.DAOConnection implements Initializable {
+public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initializable {
 
     @FXML
     private Label lblAnimes;
@@ -36,40 +51,89 @@ public class FXMLDocumentController extends DAO.DAOConnection implements Initial
     @FXML
     private Pane panelAllAnimes;
     @FXML
-    private Pane searchAnime;
-    @FXML
-    private Button btnAllAnimes;
-    @FXML
-    private Button btnSearchAnime;
-    @FXML
-    private Button btnBestAnimes;
-    @FXML
     private TextField txtSearchAnime;
     @FXML
     private Button btnFetchAnime;
+    @FXML
+    private Button btnNewAnime;
+    @FXML
+    private TableView<AniSeries> table;
+    @FXML
+    private TableColumn<AniSeries, String> idAniSeries;
+    @FXML
+    private TableColumn<AniSeries, String> seriesName;
+    @FXML
+    private TableColumn<AniSeries, String> seriesNote;
+
+    ObservableList<AniSeries> list = FXCollections.observableArrayList();
 
     Connection conn = null;
     PreparedStatement preparedStatement = null;
-    ResultSet resultSet = null;
+    
+    Stage dialogStage = new Stage();
+    Scene scene;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver"); 
-            //BD_URL = "jdbc:mysql://localhost:port/bd_name?useTimezone=true&serverTimezone=UTC;;;
+            conn = DAOConnection.getConnection();
+            fetchData("SELECT * FROM VW_ALL_SERIES;");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public FXMLDocumentController() throws ClassNotFoundException {
-        conn = getConnection();
-        System.out.println("conn" + conn);
+    public void fetchData(String _sql) throws ClassNotFoundException {
+        ResultSet rs = getInfTables(_sql);
+        getAni(rs);
     }
 
     @FXML
-    private void actionBtnAllAnimes(ActionEvent event) {
+    public void onClickEvent() {
+        AniSeries a = table.getSelectionModel().getSelectedItem();
+        messagesImpl.infoBox(null, "Informações do Anime/Mangá", "Nome anime : " + a.getSeriesName() + "\nNota do Anime : " + a.getSeriesNote());
+    }
+
+    public void getAni(ResultSet rs) {
+        list.clear();
+        try {
+            int i = 1;
+            while (rs.next()) {
+                String str = Integer.toString(i++);
+                list.add(new AniSeries(str, rs.getString("seriesName"), rs.getString("seriesNote")));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        idAniSeries.setCellValueFactory(new PropertyValueFactory<>("idAniSeries"));
+        seriesName.setCellValueFactory(new PropertyValueFactory<>("seriesName"));
+        seriesNote.setCellValueFactory(new PropertyValueFactory<>("seriesNote"));
+        table.setItems(list);
+
+    }
+
+    @FXML
+    private void actionAddAnime(ActionEvent event) throws IOException {
+        System.out.println("a");
+        Node source = (Node) event.getSource(); // Pega o evento do botão
+        System.out.println("aa");
+        dialogStage = (Stage) source.getScene().getWindow();
+        System.out.println("aaaa");
+        dialogStage.close();
+        System.out.println("aaaaaaa");
+        Parent root = FXMLLoader.load(getClass().getResource("../view/FXML_addSeries.fxml"));
+        Scene scene = new Scene (root,350,300);
+        System.out.println("aaaaaaaaaa");
+        dialogStage.setScene(scene);
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        dialogStage.show();
+    }
+
+    @FXML
+    private void actionBtnAllAnimes(ActionEvent event) throws ClassNotFoundException {
         lblAnimes.setText("Todos Animes");
+        fetchData("SELECT * FROM VW_ALL_SERIES;");
         lblAnimes.setTextFill(BLUE);
         panelAllAnimes.setStyle("-fx-background-color: #6572bc;");
         paneSearchAnimes.setStyle("-fx-background-color: #d3d3d3;");
@@ -79,8 +143,9 @@ public class FXMLDocumentController extends DAO.DAOConnection implements Initial
     }
 
     @FXML
-    private void actionBestAnimes() {
+    private void actionBestAnimes() throws ClassNotFoundException {
         lblAnimes.setText("Melhores Animes");
+        fetchData("SELECT * FROM VW_BEST_SERIES;");
         lblAnimes.setTextFill(ORANGE);
         panelAllAnimes.setStyle("-fx-background-color: #d3d3d3;");
         paneSearchAnimes.setStyle("-fx-background-color: #d3d3d3;");
@@ -101,8 +166,12 @@ public class FXMLDocumentController extends DAO.DAOConnection implements Initial
     }
 
     @FXML
-    private void actionSearchAnime() {
-
+    private void actionSearchAnime() throws ClassNotFoundException, SQLException {
+        String _sql = "CALL PROC_SEARCH_ANIME(?);";
+        preparedStatement = getConnection().prepareStatement(_sql);
+        preparedStatement.setString(1, txtSearchAnime.getText());
+        ResultSet rs = preparedStatement.executeQuery();
+        getAni(rs);
     }
 
 }

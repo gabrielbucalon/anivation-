@@ -10,48 +10,48 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLDocumentController">
-   <children>
-      <Pane layoutX="39.0" layoutY="30.0" prefHeight="63.0" prefWidth="523.0">
-         <children>
-            <Pane fx:id="paneSearchAnimes" layoutX="195.0" layoutY="40.0" prefHeight="11.0" prefWidth="134.0" style="-fx-background-color: #f3f3f3;" />
-            <Pane fx:id="panelBestAnimes" layoutX="359.0" layoutY="39.0" prefHeight="11.0" prefWidth="134.0" style="-fx-background-color: #f3f3f3;" />
-            <Button fx:id="btnSearchAnime" layoutX="195.0" layoutY="19.0" mnemonicParsing="false" onAction="#actionSearchAnimes" prefHeight="25.0" prefWidth="134.0" text="Buscar Anime" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
-               <font>
-                  <Font name="Segoe UI" size="12.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnBestAnimes" layoutX="359.0" layoutY="19.0" mnemonicParsing="false" onAction="#actionBestAnimes" prefHeight="25.0" prefWidth="134.0" text="Melhores Animes" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
-               <font>
-                  <Font name="Segoe UI" size="12.0" />
-               </font>
-            </Button>
-            <Pane fx:id="panelAllAnimes" layoutX="33.0" layoutY="40.0" prefHeight="11.0" prefWidth="134.0" style="-fx-background-color: #6572bc;" />
-            <Button fx:id="btnAllAnimes" layoutX="33.0" layoutY="19.0" mnemonicParsing="false" onAction="#actionBtnAllAnimes" prefHeight="25.0" prefWidth="134.0" text="Todos Animes" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
-               <font>
-                  <Font name="Segoe UI" size="12.0" />
-               </font>
-            </Button>
-         </children>
-      </Pane>
-      <Pane layoutX="23.0" layoutY="171.0" prefHeight="405.0" prefWidth="555.0" style="-fx-background-radius: 10x;">
-         <children>
-            <TableView layoutX="16.0" layoutY="14.0" prefHeight="200.0" prefWidth="523.0">
-              <columns>
-                <TableColumn prefWidth="75.0" text="RANK" />
-                <TableColumn prefWidth="75.0" text="Titulo" />
-                  <TableColumn prefWidth="75.0" text="Nota" />
-                  <TableColumn prefWidth="75.0" text="Ações" />
-              </columns>
-            </TableView>
-            <Button id="btnNewAnime" layoutX="514.0" layoutY="244.0" mnemonicParsing="false" style="-fx-background-radius: 50;" text="+" />
-         </children>
-      </Pane>
-      <Label fx:id="lblAnimes" layoutX="39.0" layoutY="150.0" text="Todos animes" textFill="#6572bc">
-         <font>
-            <Font name="Segoe UI" size="24.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txtSearchAnime" layoutX="258.0" layoutY="152.0" visible="false" />
-      <Button fx:id="btnFetchAnime" layoutX="420.0" layoutY="152.0" mnemonicParsing="false" onAction="#actionSearchAnime" text="Buscar anime" visible="false" />
-   </children>
+    <children>
+        <Pane layoutX="39.0" layoutY="30.0" prefHeight="63.0" prefWidth="523.0">
+            <children>
+                <Pane fx:id="paneSearchAnimes" layoutX="195.0" layoutY="40.0" prefHeight="11.0" prefWidth="134.0" style="-fx-background-color: #f3f3f3;" />
+                <Pane fx:id="panelBestAnimes" layoutX="359.0" layoutY="39.0" prefHeight="11.0" prefWidth="134.0" style="-fx-background-color: #f3f3f3;" />
+                <Button fx:id="btnSearchAnime" layoutX="195.0" layoutY="12.0" mnemonicParsing="false" onAction="#actionSearchAnimes" prefHeight="25.0" prefWidth="134.0" stylesheets="@../theme/style.css" text="Buscar Anime" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
+                    <font>
+                        <Font name="Segoe UI" size="12.0" />
+                    </font>
+                </Button>
+                <Button fx:id="btnBestAnimes" layoutX="359.0" layoutY="12.0" mnemonicParsing="false" onAction="#actionBestAnimes" prefHeight="25.0" prefWidth="134.0" stylesheets="@../theme/style.css" text="Melhores Animes" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
+                    <font>
+                        <Font name="Segoe UI" size="12.0" />
+                    </font>
+                </Button>
+                <Pane fx:id="panelAllAnimes" layoutX="33.0" layoutY="40.0" prefHeight="11.0" prefWidth="134.0" style="-fx-background-color: #6572bc;" />
+                <Button id="button" fx:id="btnAllAnimes" layoutX="33.0" layoutY="12.0" mnemonicParsing="false" onAction="#actionBtnAllAnimes" prefHeight="25.0" prefWidth="134.0" stylesheets="@../theme/style.css" text="Todos Animes" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
+                    <font>
+                        <Font name="Segoe UI" size="12.0" />
+                    </font>
+                </Button>
+            </children>
+        </Pane>
+        <Pane layoutX="23.0" layoutY="171.0" prefHeight="405.0" prefWidth="555.0" style="-fx-background-radius: 10x;">
+            <children>
+                <TableView fx:id="table" layoutX="16.0" layoutY="14.0" onMouseClicked="#onClickEvent" prefHeight="200.0" prefWidth="523.0" stylesheets="@../theme/style.css">
+                    <columns>
+                        <TableColumn fx:id="idAniSeries" prefWidth="75.0" text="RANK" />
+                        <TableColumn fx:id="seriesName" prefWidth="75.0" text="Titulo" />
+                        <TableColumn fx:id="seriesNote" prefWidth="75.0" text="Nota" />
+                        <TableColumn prefWidth="75.0" text="Ações" />
+                    </columns>
+                </TableView>
+                <Button fx:id="btnNewAnime" layoutX="514.0" layoutY="244.0" mnemonicParsing="false" onAction="#actionAddAnime" style="-fx-background-radius: 50;" text="+" />
+            </children>
+        </Pane>
+        <Label fx:id="lblAnimes" layoutX="39.0" layoutY="150.0" text="Todos animes" textFill="#6572bc">
+            <font>
+                <Font name="Segoe UI" size="24.0" />
+            </font>
+        </Label>
+        <TextField fx:id="txtSearchAnime" layoutX="258.0" layoutY="152.0" visible="false" />
+        <Button fx:id="btnFetchAnime" layoutX="420.0" layoutY="152.0" mnemonicParsing="false" onAction="#actionSearchAnime" text="Buscar anime" visible="false" />
+    </children>
 </AnchorPane>

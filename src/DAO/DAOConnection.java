@@ -17,12 +17,8 @@ public class DAOConnection{
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/anivation?useTimezone=true&serverTimezone=UTC", "root", "pa24140123");
             System.out.println("Conectado com sucesso"); // Mensagem no console
         } catch (SQLException err) {
-            System.out.println("aaaaaaaaaaaaaaaa" + err); // mensagem no console com erro
+            System.out.println("Erro" + err); // mensagem no console com erro
         }
         return conn; // retornando a conexão, mesmo certo ou errado.
-    }
-
-    public void getInfTables(String nameTable) {
-        
     }
 }
