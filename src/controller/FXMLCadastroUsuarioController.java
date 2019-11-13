@@ -14,6 +14,8 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,7 +42,7 @@ public class FXMLCadastroUsuarioController extends DAO.DAOConnection implements 
     @FXML
     private PasswordField txt_senha;
     @FXML
-    private DatePicker drop_Data;
+    private TextField drop_Data;
     @FXML
     private Button btn_Enviar;
     @FXML
@@ -61,7 +63,11 @@ public class FXMLCadastroUsuarioController extends DAO.DAOConnection implements 
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FXMLCadastroUsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }   
     
     public void start(Stage primaryStage) {
@@ -90,30 +96,47 @@ public class FXMLCadastroUsuarioController extends DAO.DAOConnection implements 
         apelido = txt_Apelido.getText();
         email = txt_Email.getText();
         senha = txt_senha.getText();
-        LocalDate data = drop_Data.getValue();
+        data = drop_Data.getText();
         
-        String _sql = "INSERT INTO aniuser(fullname,nicknameUser, email, password) VALUES(?, ?, ?, ?)";
+            //System.out.println("antes dp call");
+            //CallableStatement cs = conn.prepareCall("SELECT FUNC_INSERT_USER(?, ?, ?, ?, ?)");
+            //System.out.println("dps do call");
+            
+            //cs.setString("fullName", nome);
+            //cs.setString("nicknameUser", apelido);
+            //cs.setString("email", email);
+            //cs.setString("password",senha);
+            //cs.setString("birthDate", data);
+            //System.out.println("antes do execute");
+            //cs.executeQuery();
+            //System.out.println("depois do execute");
         
-                    try {
-                preparedStatement = conn.prepareStatement(_sql);
-                preparedStatement.setString(1, nome);
-                preparedStatement.setString(2, apelido);
-                preparedStatement.setString(3, email);
-                preparedStatement.setString(4, senha);
-                //preparedStatement.setString(5, String(data));
-                resultSet = preparedStatement.executeQuery();
-                //Caso ele não encontre o usuario, entrara nessa condição
-                
-                System.out.println("oi");
+        
+        try {
+            String _sql = "SELECT FUNC_INSERT_USER (?,?,?,?,?)";
+
+            System.out.println("oooooiiiiii");
+            preparedStatement = conn.prepareStatement(_sql);
+            preparedStatement.setString(1,nome);
+            preparedStatement.setString(2, apelido);
+            preparedStatement.setString(3, email);
+            preparedStatement.setString(4, senha);
+            preparedStatement.setString(5, data);
+            resultSet = preparedStatement.executeQuery();
+            
+             if (!resultSet.next()) {
+                    //lblUserNotFound.setVisible(true);
+            } else {
                 Node source = (Node) event.getSource(); // Pega o evento do botão
                 dialogStage = (Stage) source.getScene().getWindow();
                 dialogStage.close();
-                start(dialogStage);                
-            } catch (Exception err) {
-
-                // messages.infoBoxErr("Não foi possível entrar\nTente novamente", "ERRO!", null);
-                System.out.println("Ops, não deu para logar " + err);
-            }
+                start(dialogStage);  
+            }            
+              
+        } catch (Exception err) {
+            // messages.infoBoxErr("Não foi possível entrar\nTente novamente", "ERRO!", null);
+            System.out.println("Ops, não deu para cadastrar " + err);
+        }
        
         System.out.println(nome);       
         System.out.println(apelido);
@@ -121,5 +144,5 @@ public class FXMLCadastroUsuarioController extends DAO.DAOConnection implements 
         System.out.println(senha);
         System.out.println(data);
     }
-    
+   
 }

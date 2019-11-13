@@ -33,7 +33,7 @@
                 </Button>
             </children>
         </Pane>
-        <Pane layoutX="23.0" layoutY="171.0" prefHeight="405.0" prefWidth="555.0" style="-fx-background-radius: 10x;">
+        <Pane layoutX="23.0" layoutY="171.0" prefHeight="405.0" prefWidth="555.0" style="-fx-background-radius: 10px;">
             <children>
                 <TableView fx:id="table" layoutX="16.0" layoutY="14.0" onMouseClicked="#onClickEvent" prefHeight="200.0" prefWidth="523.0" stylesheets="@../theme/style.css">
                     <columns>

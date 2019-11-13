@@ -82,6 +82,19 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void start(Stage primaryStage){    
+        try{
+            primaryStage.close();
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/FXML_addSeries.fxml"));
+            Scene scene = new Scene(root, 600, 600);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
+        catch(Exception e){
+            System.out.println("testeeeeeee  " + e);
+        }
+    }
 
     public void fetchData(String _sql) throws ClassNotFoundException {
         ResultSet rs = getInfTables(_sql);
@@ -115,19 +128,24 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
 
     @FXML
     private void actionAddAnime(ActionEvent event) throws IOException {
-        System.out.println("a");
+       // System.out.println("a");
+        //Node source = (Node) event.getSource(); // Pega o evento do botão
+        //System.out.println("aa");
+        //dialogStage = (Stage) source.getScene().getWindow();
+        //System.out.println("aaaa");
+        //dialogStage.close();
+        //System.out.println("aaaaaaa");
+        //Parent root = FXMLLoader.load(getClass().getResource("../view/FXML_addSeries.fxml"));
+        //Scene scene = new Scene (root,350,300);
+        //System.out.println("aaaaaaaaaa");
+        //dialogStage.setScene(scene);
+        //System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        //dialogStage.show();
+        
         Node source = (Node) event.getSource(); // Pega o evento do botão
-        System.out.println("aa");
         dialogStage = (Stage) source.getScene().getWindow();
-        System.out.println("aaaa");
         dialogStage.close();
-        System.out.println("aaaaaaa");
-        Parent root = FXMLLoader.load(getClass().getResource("../view/FXML_addSeries.fxml"));
-        Scene scene = new Scene (root,350,300);
-        System.out.println("aaaaaaaaaa");
-        dialogStage.setScene(scene);
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        dialogStage.show();
+        start(dialogStage);
     }
 
     @FXML
