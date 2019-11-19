@@ -6,6 +6,7 @@
 package controller;
 
 import java.net.URL;
+import java.sql.CallableStatement;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +16,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
+import DAO.DAOConnection;
+import java.sql.SQLException;
 
 /**
  * FXML Controller class
@@ -43,8 +46,16 @@ public class FXML_addSeriesController implements Initializable {
     }
 
     @FXML
-    private void createAnime() {
-
+    private void createAnime() throws SQLException {
+        try {
+            CallableStatement cs = DAOConnection.getConnection().prepareCall("SELECT FUNC_REGISTER_SERIES(?, ?)");
+            cs.setString(1, txtAnimeName.getText());
+            cs.setString(2, "10");
+            cs.executeQuery();
+            backToPage(null);
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 
     @FXML

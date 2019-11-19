@@ -5,6 +5,8 @@
         <group>
             <file>file:/C:/workspace/anivation/src/view/FXMLDocument.fxml</file>
             <file>file:/C:/workspace/anivation/src/controller/FXMLDocumentController.java</file>
+            <file>file:/C:/workspace/anivation/src/controller/FXML_addSeriesController.java</file>
+            <file>file:/C:/workspace/anivation/src/view/FXML_addSeries.fxml</file>
         </group>
     </open-files>
 </project-private>
