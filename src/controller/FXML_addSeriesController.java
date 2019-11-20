@@ -5,8 +5,9 @@
  */
 package controller;
 
+import DAO.AnimeSeriesDAO;
+import DAO.AnimeSeriesDAOImpl;
 import java.net.URL;
-import java.sql.CallableStatement;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,18 +17,21 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-import DAO.DAOConnection;
 import java.sql.SQLException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
+import model.AnimeReSeries;
 
 /**
  * FXML Controller class
  *
  * @author Gabriel Bucalon
  */
-public class FXML_addSeriesController implements Initializable {
+public class FXML_addSeriesController extends AnimeSeriesDAOImpl implements Initializable {
 
     @FXML
-    private TextField txtSearchtxtAnimeGenre;
+    private TextField txtAnimeGenre;
     @FXML
     private TextField txtAnimeName;
     @FXML
@@ -36,25 +40,32 @@ public class FXML_addSeriesController implements Initializable {
     private TextArea txtAnimeSynopsis;
     @FXML
     private TextArea txtAnimeComment;
+    @FXML
+    private ComboBox combNoteSeries;
 
     Stage dialogStage = new Stage();
     Scene scene;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        getNoteAnime();
     }
 
     @FXML
-    private void createAnime() throws SQLException {
-        try {
-            CallableStatement cs = DAOConnection.getConnection().prepareCall("SELECT FUNC_REGISTER_SERIES(?, ?)");
-            cs.setString(1, txtAnimeName.getText());
-            cs.setString(2, "10");
-            cs.executeQuery();
-            backToPage(null);
-        } catch (SQLException e) {
-            System.out.println(e);
+    private void createOneAnime(ActionEvent event) {
+        AnimeReSeries ani = new AnimeReSeries();
+        ani.setComments(txtAnimeComment.getText());
+        ani.setEpisodes(txtAnimeEpisodes.getText());
+        ani.setGender(txtAnimeGenre.getText());
+        ani.setNameAimeSeries(txtAnimeName.getText());
+        ani.setNote((String) combNoteSeries.getValue());
+        ani.setSinopse(txtAnimeSynopsis.getText());
+        boolean save = createAnime("SELECT FUNC_REGISTER_SERIES(?, ?, ?, ?, ?, ?)", ani);
+        if(save){
+            backToPage(event);
+            utils.messagesImpl.infoBox("Salvo", "Salvo!", "Cadastro Realizado com suceeso");
+        }else{
+            utils.messagesImpl.infoBox("Erro", "Erro!", "Problemas ao salvar o formulario");
         }
     }
 
@@ -65,13 +76,30 @@ public class FXML_addSeriesController implements Initializable {
         dialogStage.close();
     }
 
+    private void getNoteAnime() {
+        ObservableList<String> options
+                = FXCollections.observableArrayList(
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10"
+                );
+        combNoteSeries.setItems(options);
+    }
+
     @FXML
     private void clearFields() {
         txtAnimeComment.clear();
         txtAnimeEpisodes.clear();
         txtAnimeName.clear();
         txtAnimeSynopsis.clear();
-        txtSearchtxtAnimeGenre.clear();
+        txtAnimeGenre.clear();
     }
 
 }

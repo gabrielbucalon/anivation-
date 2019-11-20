@@ -21,7 +21,9 @@ public class AnimeReSeries {
         this.sinopse = sinopse;
         this.note = note;
     }
-
+    
+    public AnimeReSeries(){}
+    
     /**
      * @return the comments
      */
