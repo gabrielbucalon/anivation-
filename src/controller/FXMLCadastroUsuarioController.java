@@ -5,6 +5,7 @@
  */
 package controller;
 
+import DAO.UserDAOImpl;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,16 +24,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.User;
+import utils.messagesImpl;
 
-public class FXMLCadastroUsuarioController extends DAO.DAOConnection implements Initializable {
+public class FXMLCadastroUsuarioController extends UserDAOImpl implements Initializable {
 
-    
     @FXML
     private TextField txt_NomeCompleto;
     @FXML
     private TextField txt_Apelido;
     @FXML
-    private TextField txt_Email;   
+    private TextField txt_Email;
     @FXML
     private PasswordField txt_senha;
     @FXML
@@ -51,19 +53,19 @@ public class FXMLCadastroUsuarioController extends DAO.DAOConnection implements 
 
     String nome;
     String apelido;
-    String email;    
+    String email;
     String senha;
     String data;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");            
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(FXMLCadastroUsuarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }   
-    
+    }
+
     public void start(Stage primaryStage) {
         try {
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/FXML_Login.fxml"));
@@ -76,49 +78,34 @@ public class FXMLCadastroUsuarioController extends DAO.DAOConnection implements 
         }
 
     }
-    
-    public void btnCancelarCadastro(ActionEvent event){
+
+    public void btnCancelarCadastro(ActionEvent event) {
         Node source = (Node) event.getSource(); // Pega o evento do botão
         dialogStage = (Stage) source.getScene().getWindow();
         dialogStage.close();
         start(dialogStage);
     }
-    
-    @FXML
-    public void btnEnviarCadastro(ActionEvent event){
-        nome = txt_NomeCompleto.getText();        
-        apelido = txt_Apelido.getText();
-        email = txt_Email.getText();
-        senha = txt_senha.getText();
-        data = drop_Data.getText();       
-                
-        try {
-            conn = getConnection();
-            String _sql = "INSERT INTO aniUser(fullName, nicknameUser, email, password, birthDate) VALUES(?,?,?,?,?)";
 
-            preparedStatement = conn.prepareStatement(_sql);
-            preparedStatement.setString(1,nome);
-            preparedStatement.setString(2, apelido);
-            preparedStatement.setString(3, email);
-            preparedStatement.setString(4, senha);
-            preparedStatement.setString(5, data);
-            preparedStatement.executeUpdate();
-            
+    @FXML
+    public void btnEnviarCadastro(ActionEvent event) {
+        User user = new User();
+        user.setNome(txt_NomeCompleto.getText());
+        user.setApelido(txt_Apelido.getText());
+        user.setData(txt_Email.getText());
+        user.setEmail(txt_senha.getText());
+        user.setSenha(drop_Data.getText());
+        boolean save = create("INSERT INTO aniUser(fullName, nicknameUser, email, password, birthDate) VALUES(?,?,?,?,?)", user);
+        if (save) {
+            messagesImpl.infoBox("Sucesso", "Cadastro realizado com sucesso", user.getNome() + "  Cadastro com sucesso" );
             Node source = (Node) event.getSource(); // Pega o evento do botão
             dialogStage = (Stage) source.getScene().getWindow();
             dialogStage.close();
-            start(dialogStage);                          
-              
-        } catch (Exception err) {
-            // messages.infoBoxErr("Não foi possível entrar\nTente novamente", "ERRO!", null);
-            System.out.println("Ops, não deu para cadastrar " + err);
+            start(dialogStage);
+            
+        }else {
+            messagesImpl.infoBoxErr("ERRO", "ERRO", "Não foi possivel realizar cadastro do usuário");
         }
-       
-        System.out.println(nome);       
-        System.out.println(apelido);
-        System.out.println(email);
-        System.out.println(senha);
-        System.out.println(data);
+
     }
-   
+
 }
