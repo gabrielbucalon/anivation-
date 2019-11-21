@@ -1,26 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAO;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import static java.util.Collections.list;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.AniSeries;
+import model.AnimeReSeries;
 
 /**
  *
- * @author Administrador
+ * @author Gabriel Bucalon
  */
 public class AnimeSeriesDAOImpl extends DAOConnection implements AnimeSeriesDAO {
+
     ResultSet rs = null;
-    
-    public AnimeSeriesDAOImpl(){
+
+    public AnimeSeriesDAOImpl() {
         getConnection();
     }
 
@@ -34,6 +29,21 @@ public class AnimeSeriesDAOImpl extends DAOConnection implements AnimeSeriesDAO 
         return null;
     }
 
-
-
+    public boolean createAnime(String query, AnimeReSeries ani) {
+        try {
+            int ep = Integer.parseInt(ani.getEpisodes());
+            CallableStatement cs = getConnection().prepareCall(query);
+            cs.setString(1, ani.getNameAimeSeries());
+            cs.setString(2, ani.getGender());
+            cs.setInt(3, ep);
+            cs.setString(4, ani.getSinopse());
+            cs.setString(5, ani.getNote());
+            cs.setString(6, ani.getComments());
+            cs.executeQuery();
+            return true;
+        } catch (NumberFormatException | SQLException e) {
+            System.out.println("CREATE ANIME, DAO" + e);
+        }
+        return false;
+    }
 }

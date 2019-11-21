@@ -6,6 +6,7 @@
 package DAO;
 
 import java.sql.ResultSet;
+import model.AnimeReSeries;
 
 /**
  *
@@ -19,4 +20,6 @@ public interface AnimeSeriesDAO {
      * @return
      */
     public ResultSet getInfTables(String nameTable);
+    
+    public boolean createAnime(String query, AnimeReSeries ani);
 }

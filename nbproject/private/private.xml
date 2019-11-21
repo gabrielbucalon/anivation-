@@ -6,6 +6,15 @@
             <file>file:/C:/AniVation/src/controller/FXMLCadastroUsuarioController.java</file>
             <file>file:/C:/AniVation/src/view/FXMLCadastroUsuario.fxml</file>
             <file>file:/C:/AniVation/src/controller/LoginController.java</file>
+            <file>file:/C:/workspace/anivation/src/utils/messagesImpl.java</file>
+            <file>file:/C:/workspace/anivation/src/DAO/AnimeSeriesDAO.java</file>
+            <file>file:/C:/workspace/anivation/src/view/FXMLDocument.fxml</file>
+            <file>file:/C:/workspace/anivation/src/model/AniSeries.java</file>
+            <file>file:/C:/workspace/anivation/src/controller/FXMLDocumentController.java</file>
+            <file>file:/C:/workspace/anivation/src/controller/FXML_addSeriesController.java</file>
+            <file>file:/C:/workspace/anivation/src/DAO/DAOConnection.java</file>
+            <file>file:/C:/workspace/anivation/src/DAO/AnimeSeriesDAOImpl.java</file>
+            <file>file:/C:/workspace/anivation/src/view/FXML_addSeries.fxml</file>
         </group>
     </open-files>
 </project-private>

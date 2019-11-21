@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -35,15 +36,20 @@
         </Pane>
         <Pane layoutX="23.0" layoutY="171.0" prefHeight="405.0" prefWidth="555.0" style="-fx-background-radius: 10px;">
             <children>
-                <TableView fx:id="table" layoutX="16.0" layoutY="14.0" onMouseClicked="#onClickEvent" prefHeight="200.0" prefWidth="523.0" stylesheets="@../theme/style.css">
+                <TableView fx:id="table" layoutX="16.0" layoutY="14.0" onMouseClicked="#onClickEvent" prefHeight="340.0" prefWidth="523.0" stylesheets="@../theme/style.css">
                     <columns>
-                        <TableColumn fx:id="idAniSeries" prefWidth="75.0" text="RANK" />
-                        <TableColumn fx:id="seriesName" prefWidth="75.0" text="Titulo" />
-                        <TableColumn fx:id="seriesNote" prefWidth="75.0" text="Nota" />
-                        <TableColumn prefWidth="75.0" text="Ações" />
+                        <TableColumn fx:id="idAniSeries" prefWidth="106.0" text="RANK" />
+                        <TableColumn fx:id="seriesName" prefWidth="316.0" text="Titulo" />
+                        <TableColumn fx:id="seriesNote" prefWidth="97.0" text="Nota" />
                     </columns>
                 </TableView>
-                <Button fx:id="btnNewAnime" layoutX="514.0" layoutY="244.0" mnemonicParsing="false" onAction="#actionAddAnime" style="-fx-background-radius: 50;" text="+" />
+            <Button ellipsisString="+" layoutX="480.0" layoutY="365.0" mnemonicParsing="false" onAction="#actionAddAnime" prefHeight="33.0" prefWidth="0.0" style="-fx-background-radius: 25px;" stylesheets="@../theme/style.css" text="+">
+               <font>
+                  <Font name="System Bold" size="3.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets></Button>
             </children>
         </Pane>
         <Label fx:id="lblAnimes" layoutX="39.0" layoutY="150.0" text="Todos animes" textFill="#6572bc">

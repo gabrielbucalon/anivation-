@@ -23,7 +23,7 @@ public class messagesImpl {
     }
 
     
-    public void infoBoxErr(String infoMessage, String titleBar, String headerMessage) {
+    public static void infoBoxErr(String infoMessage, String titleBar, String headerMessage) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(titleBar);
         alert.setHeaderText(headerMessage);

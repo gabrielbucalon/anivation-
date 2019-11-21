@@ -14,7 +14,7 @@ public class DAOConnection{
         Connection conn = null;
         try { // Tentando conectar com banco de dados
             //Passagem de parametros para conexão com banco de dados
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/anivation?useTimezone=true&serverTimezone=UTC", "root", "pa24140123");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/anivation?useTimezone=true&serverTimezone=UTC", "root", "123456");
             System.out.println("Conectado com sucesso"); // Mensagem no console
         } catch (SQLException err) {
             System.out.println("Erro" + err); // mensagem no console com erro
