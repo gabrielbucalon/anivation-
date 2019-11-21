@@ -90,42 +90,24 @@ public class FXMLCadastroUsuarioController extends DAO.DAOConnection implements 
         apelido = txt_Apelido.getText();
         email = txt_Email.getText();
         senha = txt_senha.getText();
-        data = drop_Data.getText();
-        
-            //System.out.println("antes dp call");
-            //CallableStatement cs = conn.prepareCall("SELECT FUNC_INSERT_USER(?, ?, ?, ?, ?)");
-            //System.out.println("dps do call");
-            
-            //cs.setString("fullName", nome);
-            //cs.setString("nicknameUser", apelido);
-            //cs.setString("email", email);
-            //cs.setString("password",senha);
-            //cs.setString("birthDate", data);
-            //System.out.println("antes do execute");
-            //cs.executeQuery();
-            //System.out.println("depois do execute");
-        
-        
+        data = drop_Data.getText();       
+                
         try {
-            String _sql = "SELECT FUNC_INSERT_USER (?,?,?,?,?)";
+            conn = getConnection();
+            String _sql = "INSERT INTO aniUser(fullName, nicknameUser, email, password, birthDate) VALUES(?,?,?,?,?)";
 
-            System.out.println("oooooiiiiii");
             preparedStatement = conn.prepareStatement(_sql);
             preparedStatement.setString(1,nome);
             preparedStatement.setString(2, apelido);
             preparedStatement.setString(3, email);
             preparedStatement.setString(4, senha);
             preparedStatement.setString(5, data);
-            resultSet = preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
             
-             if (!resultSet.next()) {
-                    //lblUserNotFound.setVisible(true);
-            } else {
-                Node source = (Node) event.getSource(); // Pega o evento do botão
-                dialogStage = (Stage) source.getScene().getWindow();
-                dialogStage.close();
-                start(dialogStage);  
-            }            
+            Node source = (Node) event.getSource(); // Pega o evento do botão
+            dialogStage = (Stage) source.getScene().getWindow();
+            dialogStage.close();
+            start(dialogStage);                          
               
         } catch (Exception err) {
             // messages.infoBoxErr("Não foi possível entrar\nTente novamente", "ERRO!", null);
