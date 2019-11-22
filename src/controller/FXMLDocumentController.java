@@ -33,6 +33,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.AniSeries;
+import model.User;
 import utils.messagesImpl;
 
 /**
@@ -74,6 +75,9 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        User user = new User();
+        System.out.println(user.getEmail());
+        
         try {
             conn = DAOConnection.getConnection();
             fetchData("SELECT * FROM VW_ALL_SERIES;");
@@ -98,6 +102,10 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
     public void fetchData(String _sql) throws ClassNotFoundException {
         ResultSet rs = getInfTables(_sql);
         getAni(rs);
+    }
+    
+    public static void getUser(User user){
+        System.out.println("ifajdoijdasoidfjoijfdodfs   " + user.getEmail());
     }
 
     @FXML

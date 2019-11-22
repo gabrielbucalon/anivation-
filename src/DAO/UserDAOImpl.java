@@ -22,12 +22,6 @@ public class UserDAOImpl implements UserDAO {
         try {
             getConnection();
             PreparedStatement stmt = getConnection().prepareStatement(query);
-            System.out.println(user.getNome());
-            System.out.println(user.getApelido());
-            System.out.println(user.getEmail());
-            System.out.println(user.getSenha());
-            System.out.println(user.getData());
-
             stmt.setString(1, user.getNome());
             stmt.setString(2, user.getApelido());
             stmt.setString(3, user.getEmail());

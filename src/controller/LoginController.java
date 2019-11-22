@@ -22,6 +22,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.User;
 
 public class LoginController extends DAO.DAOConnection implements Initializable {
 
@@ -54,11 +55,10 @@ public class LoginController extends DAO.DAOConnection implements Initializable 
 
     public LoginController() throws ClassNotFoundException {
         conn = getConnection();
-        System.out.println("conn" + conn);
     }
-    
+
     public void start(Stage primaryStage, int i) {
-        if(i == 1){
+        if (i == 1) {
             try {
                 primaryStage.close();
                 Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/FXMLDocument.fxml"));
@@ -69,7 +69,7 @@ public class LoginController extends DAO.DAOConnection implements Initializable 
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else if( i == 2){
+        } else if (i == 2) {
             try {
                 primaryStage.close();
                 Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/FXMLCadastroUsuario.fxml"));
@@ -113,6 +113,11 @@ public class LoginController extends DAO.DAOConnection implements Initializable 
                 if (!resultSet.next()) {
                     //lblUserNotFound.setVisible(true);
                 } else {
+
+                    // System.out.println("porra" + resultSet.getString("email"));
+                    User user = new User();
+                    user.setEmail(resultSet.getString("email"));
+                    FXMLDocumentController.getUser(user);
                     System.out.println("oi");
                     Node source = (Node) event.getSource(); // Pega o evento do botão
                     dialogStage = (Stage) source.getScene().getWindow();
@@ -126,8 +131,8 @@ public class LoginController extends DAO.DAOConnection implements Initializable 
             }
         }
     }
-    
-    public void linkCadastrarNovoUsuario(ActionEvent event){
+
+    public void linkCadastrarNovoUsuario(ActionEvent event) {
         Node source = (Node) event.getSource(); // Pega o evento do botão
         dialogStage = (Stage) source.getScene().getWindow();
         dialogStage.close();
