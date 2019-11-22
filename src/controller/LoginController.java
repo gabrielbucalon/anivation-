@@ -94,6 +94,7 @@ public class LoginController extends FXMLDocumentController implements Initializ
                 } else {
                     User user = new User();
                     user.setIdUser(resultSet.getString("idAniUser"));
+                    user.setApelido(resultSet.getString("nickNameUser"));
                     setUser(user);
                     Node source = (Node) event.getSource(); // Pega o evento do botão
                     dialogStage = (Stage) source.getScene().getWindow();

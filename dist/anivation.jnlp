@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="anivation.jar" size="2193372" download="eager" />
+    <jar href="anivation.jar" size="2193614" download="eager" />
     <jar href="lib\jfoenix.jar" size="2211776" download="eager" />
     <jar href="lib\mysql-connector-java-8.0.16.jar" size="2293144" download="eager" />
     <jar href="lib\protobuf-java-3.6.1.jar" size="1421323" download="eager" />

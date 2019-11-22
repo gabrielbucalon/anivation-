@@ -12,7 +12,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLDocumentController">
     <children>
-        <Pane layoutX="39.0" layoutY="30.0" prefHeight="63.0" prefWidth="523.0">
+        <Pane layoutX="39.0" layoutY="60.0" prefHeight="63.0" prefWidth="523.0">
             <children>
                 <Pane fx:id="paneSearchAnimes" layoutX="195.0" layoutY="40.0" prefHeight="11.0" prefWidth="134.0" style="-fx-background-color: #f3f3f3;" />
                 <Pane fx:id="panelBestAnimes" layoutX="359.0" layoutY="39.0" prefHeight="11.0" prefWidth="134.0" style="-fx-background-color: #f3f3f3;" />
@@ -67,5 +67,15 @@
         </Label>
         <TextField fx:id="txtSearchAnime" layoutX="258.0" layoutY="152.0" visible="false" />
         <Button fx:id="btnFetchAnime" layoutX="420.0" layoutY="152.0" mnemonicParsing="false" onAction="#actionSearchAnime" text="Buscar anime" visible="false" />
+      <Label fx:id="lblWelcome" layoutX="300.0" layoutY="22.0" text="Bem vindo(a)," textFill="#6572bc">
+         <font>
+            <Font name="Segoe UI" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblWelcomeNameUser" layoutX="446.0" layoutY="22.0" prefHeight="29.0" prefWidth="147.0" textFill="#6572bc">
+         <font>
+            <Font name="Segoe UI" size="24.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

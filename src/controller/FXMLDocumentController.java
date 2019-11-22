@@ -41,6 +41,8 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
     @FXML
     private Label lblAnimes;
     @FXML
+    private Label lblWelcomeNameUser;
+    @FXML
     private Pane paneSearchAnimes;
     @FXML
     private Pane panelBestAnimes;
@@ -57,14 +59,13 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
     @FXML
     private TableView<AniSeries> table;
     @FXML
-    private TableColumn<AniSeries, String> nicknameUser;
+    public TableColumn<AniSeries, String> nicknameUser;
     @FXML
     private TableColumn<AniSeries, String> idAniSeries;
     @FXML
     private TableColumn<AniSeries, String> seriesName;
     @FXML
     private TableColumn<AniSeries, String> seriesNote;
-    
 
     ObservableList<AniSeries> list = FXCollections.observableArrayList();
 
@@ -73,29 +74,31 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
 
     Stage dialogStage = new Stage();
     Scene scene;
-    
-    
+
     public static String userIdInferno;
+    private static String nameUser;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        System.out.println("jfdasoi bom dia corno" + nameUser);
+        lblWelcomeNameUser.setText(nameUser);
         try {
             conn = DAOConnection.getConnection();
+            
             fetchData("SELECT * FROM VW_ALL_SERIES;");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void start(Stage primaryStage){    
-        try{
+
+    public void start(Stage primaryStage) {
+        try {
             primaryStage.close();
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/FXML_addSeries.fxml"));
             Scene scene = new Scene(root, 600, 600);
             primaryStage.setScene(scene);
             primaryStage.show();
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             System.out.println("error  " + e);
         }
     }
@@ -104,11 +107,13 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
         ResultSet rs = getInfTables(_sql);
         getAni(rs);
     }
-    
-    public void setUser(User user){
+
+    public void setUser(User user) {
+        System.out.println("viado e corno" + user.getApelido());
         this.userIdInferno = user.getIdUser();
+        nameUser = user.getApelido();
     }
-    
+
     @FXML
     public void onClickEvent() {
         AniSeries a = table.getSelectionModel().getSelectedItem();
@@ -121,8 +126,8 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
             int i = 1;
             while (rs.next()) {
                 String str = Integer.toString(i++);
-                System.out.println("sda9f1ads  " + rs.getString(3));
-                list.add(new AniSeries(str, rs.getString("seriesName"), rs.getString("seriesNote"), rs.getString(3)));
+                System.out.println("sda9f1ads  " + rs.getString("nickNameUser"));
+                list.add(new AniSeries(str, rs.getString("seriesName"), rs.getString("seriesNote"), rs.getString("nicknameUser")));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -131,6 +136,7 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
         idAniSeries.setCellValueFactory(new PropertyValueFactory<>("idAniSeries"));
         seriesName.setCellValueFactory(new PropertyValueFactory<>("seriesName"));
         seriesNote.setCellValueFactory(new PropertyValueFactory<>("seriesNote"));
+        //System.out.println();
         nicknameUser.setCellValueFactory(new PropertyValueFactory<>("nicknameUser"));
         table.setItems(list);
     }
@@ -141,7 +147,7 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/FXML_addSeries.fxml"));
             Scene scene = new Scene(root, 600, 600);
             primaryStage.setScene(scene);
-            primaryStage.show();    
+            primaryStage.show();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -190,7 +196,7 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
         btnFetchAnime.setVisible(true);
         txtSearchAnime.setVisible(true);
     }
-    
+
     @FXML
     private void actionYourAnime() {
         lblAnimes.setText("Seus animes");
@@ -202,8 +208,6 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
         btnFetchAnime.setVisible(false);
         txtSearchAnime.setVisible(false);
     }
-    
-    
 
     @FXML
     private void actionSearchAnime() throws ClassNotFoundException, SQLException {
