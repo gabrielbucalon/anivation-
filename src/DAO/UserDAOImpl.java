@@ -7,8 +7,6 @@ package DAO;
 
 import static DAO.DAOConnection.getConnection;
 import java.sql.PreparedStatement;
-import javafx.scene.Node;
-import javafx.stage.Stage;
 import model.User;
 
 /**

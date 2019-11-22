@@ -33,12 +33,13 @@ public class AnimeSeriesDAOImpl extends DAOConnection implements AnimeSeriesDAO 
         try {
             int ep = Integer.parseInt(ani.getEpisodes());
             CallableStatement cs = getConnection().prepareCall(query);
-            cs.setString(1, ani.getNameAimeSeries());
-            cs.setString(2, ani.getGender());
-            cs.setInt(3, ep);
-            cs.setString(4, ani.getSinopse());
-            cs.setString(5, ani.getNote());
-            cs.setString(6, ani.getComments());
+            cs.setString(1, ani.getIdUser());
+            cs.setString(2, ani.getNameAimeSeries());
+            cs.setString(3, ani.getGender());
+            cs.setInt(4, ep);
+            cs.setString(5, ani.getSinopse());
+            cs.setString(6, ani.getNote());
+            cs.setString(7, ani.getComments());
             cs.executeQuery();
             return true;
         } catch (NumberFormatException | SQLException e) {

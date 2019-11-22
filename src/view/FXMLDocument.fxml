@@ -39,17 +39,25 @@
                 <TableView fx:id="table" layoutX="16.0" layoutY="14.0" onMouseClicked="#onClickEvent" prefHeight="340.0" prefWidth="523.0" stylesheets="@../theme/style.css">
                     <columns>
                         <TableColumn fx:id="idAniSeries" prefWidth="106.0" text="RANK" />
-                        <TableColumn fx:id="seriesName" prefWidth="316.0" text="Titulo" />
-                        <TableColumn fx:id="seriesNote" prefWidth="97.0" text="Nota" />
+                        <TableColumn fx:id="seriesName" prefWidth="90.0" text="Titulo" />
+                        <TableColumn fx:id="seriesNote" prefWidth="61.0" text="Nota" />
+                        <TableColumn fx:id="nicknameUser" prefWidth="106.0" text="Usuário" />
                     </columns>
                 </TableView>
-            <Button ellipsisString="+" layoutX="480.0" layoutY="365.0" mnemonicParsing="false" onAction="#actionAddAnime" prefHeight="33.0" prefWidth="0.0" style="-fx-background-radius: 25px;" stylesheets="@../theme/style.css" text="+">
+                <Button ellipsisString="+" layoutX="480.0" layoutY="365.0" mnemonicParsing="false" onAction="#actionAddAnime" prefHeight="33.0" prefWidth="0.0" style="-fx-background-radius: 25px;" stylesheets="@../theme/style.css" text="+">
+                    <font>
+                        <Font name="System Bold" size="3.0" />
+                    </font>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                </Button>
+            <Pane fx:id="panelYourAnime" layoutX="14.0" layoutY="399.0" prefHeight="11.0" prefWidth="134.0" style="-fx-background-color: #f3f3f3;" />
+            <Button layoutX="14.0" layoutY="372.0" mnemonicParsing="false" onAction="#actionYourAnime" prefHeight="25.0" prefWidth="134.0" stylesheets="@../theme/style.css" text="Seus animes" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
                <font>
-                  <Font name="System Bold" size="3.0" />
+                  <Font name="Segoe UI" size="12.0" />
                </font>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets></Button>
+            </Button>
             </children>
         </Pane>
         <Label fx:id="lblAnimes" layoutX="39.0" layoutY="150.0" text="Todos animes" textFill="#6572bc">

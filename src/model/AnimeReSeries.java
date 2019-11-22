@@ -11,6 +11,8 @@ public class AnimeReSeries {
     private String episodes;
     private String sinopse;
     private String note;
+    private String nicknameUser;
+    private String idUser;
 
     public AnimeReSeries(String comments, String nameAimeSeires, String gender,
             String episodes, String sinopse, String note) {
@@ -106,6 +108,34 @@ public class AnimeReSeries {
      */
     public void setNote(String note) {
         this.note = note;
+    }
+
+    /**
+     * @return the nicknameUser
+     */
+    public String getNicknameUser() {
+        return nicknameUser;
+    }
+
+    /**
+     * @param nicknameUser the nicknameUser to set
+     */
+    public void setNicknameUser(String nicknameUser) {
+        this.nicknameUser = nicknameUser;
+    }
+
+    /**
+     * @return the idUser
+     */
+    public String getIdUser() {
+        return idUser;
+    }
+
+    /**
+     * @param idUser the idUser to set
+     */
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
 }

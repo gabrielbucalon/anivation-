@@ -1,16 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
-//import static com.sun.org.apache.xml.internal.serializer.utils.Utils.messages;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import java.sql.*;
@@ -24,24 +17,19 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.User;
 
-public class LoginController extends DAO.DAOConnection implements Initializable {
+public class LoginController extends FXMLDocumentController implements Initializable {
 
     @FXML
     private TextField txt_Usuario;
     @FXML
     private PasswordField txt_senha;
-    @FXML
-    private Button btn_entrar;
 
     Stage dialogStage = new Stage();
     Scene scene;
 
-    Connection conn = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
 
-    String usuario;
-    String senha;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -54,7 +42,7 @@ public class LoginController extends DAO.DAOConnection implements Initializable 
     }
 
     public LoginController() throws ClassNotFoundException {
-        conn = getConnection();
+        DAO.DAOConnection.getConnection();
     }
 
     public void start(Stage primaryStage, int i) {
@@ -63,7 +51,6 @@ public class LoginController extends DAO.DAOConnection implements Initializable 
                 primaryStage.close();
                 Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/FXMLDocument.fxml"));
                 Scene scene = new Scene(root, 600, 600);
-                //scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
                 primaryStage.setScene(scene);
                 primaryStage.show();
             } catch (Exception e) {
@@ -74,7 +61,6 @@ public class LoginController extends DAO.DAOConnection implements Initializable 
                 primaryStage.close();
                 Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/FXMLCadastroUsuario.fxml"));
                 Scene scene = new Scene(root, 600, 600);
-                //scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
                 primaryStage.setScene(scene);
                 primaryStage.show();
             } catch (Exception e) {
@@ -93,19 +79,12 @@ public class LoginController extends DAO.DAOConnection implements Initializable 
         String _sql = "SELECT * FROM aniUser WHERE nicknameUser = ? AND password = ?";
 
         if (txt_Usuario.getText().equals("") && txt_senha.getText().equals("")) {
-            //lblRequiredUser.setVisible(true); // Caso ele não digite os dois, mostrara as duas labels
-            //lblRequiredPassword.setVisible(true);
         } else if (txt_senha.getText().equals("")) {
-            //lblRequiredPassword.setVisible(true); // Caso usuário não digitar a senha, mostrara essa label
         } else if (txt_Usuario.getText().equals("")) {
             System.out.println("entrou nos dois nulos");
-            //lblRequiredUser.setVisible(true); // Mesma coisa na condição do usuário
         } else {
-            // Label's fica invisível
-            //lblRequiredUser.setVisible(false);
-            //lblRequiredPassword.setVisible(false);
             try {
-                preparedStatement = conn.prepareStatement(_sql);
+                preparedStatement = DAO.DAOConnection.getConnection().prepareStatement(_sql);
                 preparedStatement.setString(1, usuario);
                 preparedStatement.setString(2, senha);
                 resultSet = preparedStatement.executeQuery();
@@ -113,12 +92,9 @@ public class LoginController extends DAO.DAOConnection implements Initializable 
                 if (!resultSet.next()) {
                     //lblUserNotFound.setVisible(true);
                 } else {
-
-                    // System.out.println("porra" + resultSet.getString("email"));
                     User user = new User();
-                    user.setEmail(resultSet.getString("email"));
-                    FXMLDocumentController.getUser(user);
-                    System.out.println("oi");
+                    user.setIdUser(resultSet.getString("idAniUser"));
+                    setUser(user);
                     Node source = (Node) event.getSource(); // Pega o evento do botão
                     dialogStage = (Stage) source.getScene().getWindow();
                     dialogStage.close();

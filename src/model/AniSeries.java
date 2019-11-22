@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 /**
@@ -14,14 +9,17 @@ public class AniSeries {
     private String idAniSeries;
     private String seriesName;
     private String seriesNote;
+    private String nicknameUser;
+    
+    public AniSeries(){}
 
-    public AniSeries(String idAniSeries, String seriesName, String seriesNote) {
+    public AniSeries(String idAniSeries, String seriesName, String seriesNote, String nicknameUser) {
         this.idAniSeries = idAniSeries;
         this.seriesName = seriesName;
         this.seriesNote = seriesNote;
-        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.;
+        this.nicknameUser = nicknameUser;
     }    
-
+    
     public AniSeries(int i, String string, String string0) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -66,5 +64,19 @@ public class AniSeries {
      */
     public void setSeriesNote(String seriesNote) {
         this.seriesNote = seriesNote;
+    }
+
+    /**
+     * @return the nickName
+     */
+    public String getNickName() {
+        return nicknameUser;
+    }
+
+    /**
+     * @param nickName the nickName to set
+     */
+    public void setNickName(String nickName) {
+        this.nicknameUser = nickName;
     }
 }

@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
-import DAO.AnimeSeriesDAO;
 import DAO.AnimeSeriesDAOImpl;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-import java.sql.SQLException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
@@ -60,11 +53,13 @@ public class FXML_addSeriesController extends AnimeSeriesDAOImpl implements Init
         ani.setNameAimeSeries(txtAnimeName.getText());
         ani.setNote((String) combNoteSeries.getValue());
         ani.setSinopse(txtAnimeSynopsis.getText());
-        boolean save = createAnime("SELECT FUNC_REGISTER_SERIES(?, ?, ?, ?, ?, ?)", ani);
-        if(save){
+        ani.setIdUser(FXMLDocumentController.userIdInferno);
+        System.out.println("ani.getId" + ani.getIdUser());
+        boolean save = createAnime("SELECT FUNC_REGISTER_SERIES(?, ?, ?, ?, ?, ?,?)", ani);
+        if (save) {
             backToPage(event);
             utils.messagesImpl.infoBox("Salvo", "Salvo!", "Cadastro Realizado com suceeso");
-        }else{
+        } else {
             utils.messagesImpl.infoBox("Erro", "Erro!", "Problemas ao salvar o formulario");
         }
     }

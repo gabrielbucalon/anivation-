@@ -11,6 +11,7 @@ package model;
  */
 public class User {
     private String nome;
+    private String idUser;
     private String apelido;
     private String email;
     private String senha;
@@ -88,5 +89,19 @@ public class User {
      */
     public void setData(String data) {
         this.data = data;
+    }
+
+    /**
+     * @return the idUser
+     */
+    public String getIdUser() {
+        return idUser;
+    }
+
+    /**
+     * @param idUser the idUser to set
+     */
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 }

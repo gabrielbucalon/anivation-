@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import DAO.AnimeSeriesDAOImpl;
@@ -20,6 +15,7 @@ import javafx.scene.layout.Pane;
 import static javafx.scene.paint.Color.BLUE;
 import static javafx.scene.paint.Color.ORANGE;
 import static javafx.scene.paint.Color.PURPLE;
+import static javafx.scene.paint.Color.AQUAMARINE;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,6 +47,8 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
     @FXML
     private Pane panelAllAnimes;
     @FXML
+    private Pane panelYourAnime;
+    @FXML
     private TextField txtSearchAnime;
     @FXML
     private Button btnFetchAnime;
@@ -59,11 +57,14 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
     @FXML
     private TableView<AniSeries> table;
     @FXML
+    private TableColumn<AniSeries, String> nicknameUser;
+    @FXML
     private TableColumn<AniSeries, String> idAniSeries;
     @FXML
     private TableColumn<AniSeries, String> seriesName;
     @FXML
     private TableColumn<AniSeries, String> seriesNote;
+    
 
     ObservableList<AniSeries> list = FXCollections.observableArrayList();
 
@@ -72,12 +73,12 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
 
     Stage dialogStage = new Stage();
     Scene scene;
+    
+    
+    public static String userIdInferno;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        User user = new User();
-        System.out.println(user.getEmail());
-        
         try {
             conn = DAOConnection.getConnection();
             fetchData("SELECT * FROM VW_ALL_SERIES;");
@@ -95,7 +96,7 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
             primaryStage.show();
         }
         catch(Exception e){
-            System.out.println("testeeeeeee  " + e);
+            System.out.println("error  " + e);
         }
     }
 
@@ -104,14 +105,14 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
         getAni(rs);
     }
     
-    public static void getUser(User user){
-        System.out.println("ifajdoijdasoidfjoijfdodfs   " + user.getEmail());
+    public void setUser(User user){
+        this.userIdInferno = user.getIdUser();
     }
-
+    
     @FXML
     public void onClickEvent() {
         AniSeries a = table.getSelectionModel().getSelectedItem();
-        messagesImpl.infoBox(null, "Informações do Anime/Mangá", "Nome anime : " + a.getSeriesName() + "\nNota do Anime : " + a.getSeriesNote());
+        messagesImpl.infoBox(null, "Informações do Anime/Mangá", "Nome anime : " + a.getSeriesName() + "\nNota do Anime : " + a.getSeriesNote() + "\nNota do " + a.getNickName());
     }
 
     public void getAni(ResultSet rs) {
@@ -120,7 +121,8 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
             int i = 1;
             while (rs.next()) {
                 String str = Integer.toString(i++);
-                list.add(new AniSeries(str, rs.getString("seriesName"), rs.getString("seriesNote")));
+                System.out.println("sda9f1ads  " + rs.getString(3));
+                list.add(new AniSeries(str, rs.getString("seriesName"), rs.getString("seriesNote"), rs.getString(3)));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -129,8 +131,8 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
         idAniSeries.setCellValueFactory(new PropertyValueFactory<>("idAniSeries"));
         seriesName.setCellValueFactory(new PropertyValueFactory<>("seriesName"));
         seriesNote.setCellValueFactory(new PropertyValueFactory<>("seriesNote"));
+        nicknameUser.setCellValueFactory(new PropertyValueFactory<>("nicknameUser"));
         table.setItems(list);
-
     }
 
     private void goPageAddAnime(Stage primaryStage) throws IOException {
@@ -159,6 +161,7 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
         panelAllAnimes.setStyle("-fx-background-color: #6572bc;");
         paneSearchAnimes.setStyle("-fx-background-color: #d3d3d3;");
         panelBestAnimes.setStyle("-fx-background-color: #d3d3d3;");
+        panelYourAnime.setStyle("-fx-background-color: #d3d3d3;");
         btnFetchAnime.setVisible(false);
         txtSearchAnime.setVisible(false);
     }
@@ -171,6 +174,7 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
         panelAllAnimes.setStyle("-fx-background-color: #d3d3d3;");
         paneSearchAnimes.setStyle("-fx-background-color: #d3d3d3;");
         panelBestAnimes.setStyle("-fx-background-color: #ffa500;");
+        panelYourAnime.setStyle("-fx-background-color: #d3d3d3;");
         btnFetchAnime.setVisible(false);
         txtSearchAnime.setVisible(false);
     }
@@ -182,9 +186,24 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
         panelAllAnimes.setStyle("-fx-background-color: #d3d3d3;");
         paneSearchAnimes.setStyle("-fx-background-color: #ad75ad;");
         panelBestAnimes.setStyle("-fx-background-color: #d3d3d3;");
+        panelYourAnime.setStyle("-fx-background-color: #d3d3d3;");
         btnFetchAnime.setVisible(true);
         txtSearchAnime.setVisible(true);
     }
+    
+    @FXML
+    private void actionYourAnime() {
+        lblAnimes.setText("Seus animes");
+        lblAnimes.setTextFill(AQUAMARINE);
+        panelAllAnimes.setStyle("-fx-background-color: #d3d3d3;");
+        paneSearchAnimes.setStyle("-fx-background-color: #d3d3d3;");
+        panelBestAnimes.setStyle("-fx-background-color: #d3d3d3;");
+        panelYourAnime.setStyle("-fx-background-color: #7fffd4;");
+        btnFetchAnime.setVisible(false);
+        txtSearchAnime.setVisible(false);
+    }
+    
+    
 
     @FXML
     private void actionSearchAnime() throws ClassNotFoundException, SQLException {
