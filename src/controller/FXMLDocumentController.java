@@ -109,7 +109,6 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
     }
 
     public void setUser(User user) {
-        System.out.println("viado e corno" + user.getApelido());
         this.userIdInferno = user.getIdUser();
         nameUser = user.getApelido();
     }

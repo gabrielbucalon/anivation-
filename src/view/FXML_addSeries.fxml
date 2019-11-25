@@ -8,32 +8,41 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXML_addSeriesController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to top, #ad5389, #3c1053);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXML_addSeriesController">
    <children>
-      <TextField fx:id="txtAnimeName" layoutX="70.0" layoutY="75.0" prefHeight="26.0" prefWidth="461.0" />
-      <Label fx:id="lblTitle1" layoutX="200.0" layoutY="13.0" text="Adicionar Anime">
+      <TextField fx:id="txtAnimeName" layoutX="70.0" layoutY="75.0" prefHeight="26.0" prefWidth="461.0" promptText="Nome" />
+      <Label fx:id="lblTitle1" layoutX="229.0" layoutY="27.0" text="Adicionar Anime" textFill="#c5c5c5">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="txtAnimeGenre" layoutX="70.0" layoutY="129.0" prefHeight="26.0" prefWidth="461.0" />
-      <TextField fx:id="txtAnimeEpisodes" layoutX="70.0" layoutY="185.0" prefHeight="26.0" prefWidth="461.0" />
-      <Label fx:id="lblEpisodes" layoutX="74.0" layoutY="163.0" text="Episodio(s)*" />
-      <Label fx:id="lblGenre" layoutX="72.0" layoutY="107.0" text="Genero(s)*" />
-      <Label fx:id="lblName" layoutX="71.0" layoutY="54.0" text="Nome*" />
-      <Label fx:id="lblSynopsis" layoutX="74.0" layoutY="215.0" text="Sinopse" />
-      <TextArea fx:id="txtAnimeSynopsis" layoutX="70.0" layoutY="239.0" prefHeight="105.0" prefWidth="461.0" />
-      <Label fx:id="lblTitle2" layoutX="153.0" layoutY="364.0" text="Deseja adicionar a sua nota?">
+      <TextField fx:id="txtAnimeGenre" layoutX="70.0" layoutY="129.0" prefHeight="26.0" prefWidth="461.0" promptText="Genero" />
+      <TextField fx:id="txtAnimeEpisodes" layoutX="70.0" layoutY="185.0" prefHeight="26.0" prefWidth="461.0" promptText="Episodio(s)" />
+      <TextArea fx:id="txtAnimeSynopsis" layoutX="70.0" layoutY="239.0" prefHeight="105.0" prefWidth="461.0" promptText="Sinopse" />
+      <Label fx:id="lblTitle2" layoutX="69.0" layoutY="359.0" text="Deseja adicionar a sua nota?" textFill="#c5c5c5">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lblNote" layoutX="69.0" layoutY="402.0" text="Nota" />
-      <Label fx:id="lblComment" layoutX="70.0" layoutY="436.0" text="Comentario" />
-      <TextArea fx:id="txtAnimeComment" layoutX="70.0" layoutY="461.0" prefHeight="86.0" prefWidth="461.0" />
-      <Button fx:id="btnAnimeSend" layoutX="471.0" layoutY="562.0" mnemonicParsing="false" onAction="#createOneAnime" text="Enviar" />
-      <Button fx:id="btnAnimeCancel" layoutX="388.0" layoutY="562.0" mnemonicParsing="false" onAction="#backToPage" text="Cancelar" />
-      <Button fx:id="btnClean" layoutX="69.0" layoutY="562.0" mnemonicParsing="false" onAction="#clearFields" text="Limpar" />
-      <ComboBox fx:id="combNoteSeries" layoutX="110.0" layoutY="398.0" prefWidth="150.0" />
+      <TextArea fx:id="txtAnimeComment" layoutX="70.0" layoutY="461.0" prefHeight="86.0" prefWidth="461.0" promptText="Comentario" />
+      <Button fx:id="btnAnimeSend" layoutX="471.0" layoutY="562.0" mnemonicParsing="false" onAction="#createOneAnime" prefHeight="27.0" prefWidth="63.0" style="-fx-background-color: linear-gradient(to right, #6441a5, #2a0845); -fx-border-radius: 50px;" />
+      <Button fx:id="btnAnimeCancel" layoutX="388.0" layoutY="562.0" mnemonicParsing="false" onAction="#backToPage" prefHeight="27.0" prefWidth="74.0" style="-fx-background-color: linear-gradient(to right, #FF4500, #FF0000); -fx-border-radius: 50px;" />
+      <Button fx:id="btnClean" layoutX="70.0" layoutY="562.0" mnemonicParsing="false" onAction="#clearFields" prefHeight="27.0" prefWidth="63.0" style="-fx-background-color: linear-gradient(to right, #4682B4, #008080);" />
+      <ComboBox fx:id="combNoteSeries" layoutX="70.0" layoutY="399.0" prefWidth="150.0" promptText="Nota" />
+      <Label layoutX="81.0" layoutY="567.0" text="Limpar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="399.0" layoutY="567.0" text="Cancelar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="484.0" layoutY="567.0" text="Enviar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

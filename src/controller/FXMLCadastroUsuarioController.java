@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import DAO.UserDAOImpl;
@@ -50,12 +45,6 @@ public class FXMLCadastroUsuarioController extends UserDAOImpl implements Initia
     Connection conn = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
-
-    String nome;
-    String apelido;
-    String email;
-    String senha;
-    String data;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -105,7 +94,5 @@ public class FXMLCadastroUsuarioController extends UserDAOImpl implements Initia
         }else {
             messagesImpl.infoBoxErr("ERRO", "ERRO", "Não foi possivel realizar cadastro do usuário");
         }
-
     }
-
 }
