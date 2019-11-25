@@ -9,7 +9,7 @@ public class AniSeries {
     private String idAniSeries;
     private String seriesName;
     private String seriesNote;
-    private String nicknameUser;
+    private String user;
     
     public AniSeries(){}
 
@@ -17,7 +17,7 @@ public class AniSeries {
         this.idAniSeries = idAniSeries;
         this.seriesName = seriesName;
         this.seriesNote = seriesNote;
-        this.nicknameUser = nicknameUser;
+        this.user = nicknameUser;
     }    
     
     public AniSeries(int i, String string, String string0) {
@@ -67,16 +67,16 @@ public class AniSeries {
     }
 
     /**
-     * @return the nickName
+     * @return the user
      */
-    public String getNickName() {
-        return nicknameUser;
+    public String getUser() {
+        return user;
     }
 
     /**
-     * @param nickName the nickName to set
+     * @param user the user to set
      */
-    public void setNickName(String nickName) {
-        this.nicknameUser = nickName;
+    public void setUser(String user) {
+        this.user = user;
     }
 }

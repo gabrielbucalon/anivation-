@@ -19,6 +19,7 @@ import static javafx.scene.paint.Color.AQUAMARINE;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -59,13 +60,13 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
     @FXML
     private TableView<AniSeries> table;
     @FXML
-    public TableColumn<AniSeries, String> nicknameUser;
-    @FXML
     private TableColumn<AniSeries, String> idAniSeries;
     @FXML
     private TableColumn<AniSeries, String> seriesName;
     @FXML
     private TableColumn<AniSeries, String> seriesNote;
+    @FXML
+    private TableColumn<AniSeries, String> user;
 
     ObservableList<AniSeries> list = FXCollections.observableArrayList();
 
@@ -80,15 +81,19 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("jfdasoi bom dia corno" + nameUser);
         lblWelcomeNameUser.setText(nameUser);
         try {
             conn = DAOConnection.getConnection();
-            
+
             fetchData("SELECT * FROM VW_ALL_SERIES;");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    @FXML
+    private void actionExitApp(){
+        Platform.exit();
     }
 
     public void start(Stage primaryStage) {
@@ -116,7 +121,7 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
     @FXML
     public void onClickEvent() {
         AniSeries a = table.getSelectionModel().getSelectedItem();
-        messagesImpl.infoBox(null, "Informações do Anime/Mangá", "Nome anime : " + a.getSeriesName() + "\nNota do Anime : " + a.getSeriesNote() + "\nNota do " + a.getNickName());
+        messagesImpl.infoBox(null, "Informações do Anime/Mangá", "Nome anime : " + a.getSeriesName() + "\nNota do Anime : " + a.getSeriesNote() + "\nNota do " + a.getUser());
     }
 
     public void getAni(ResultSet rs) {
@@ -125,7 +130,6 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
             int i = 1;
             while (rs.next()) {
                 String str = Integer.toString(i++);
-                System.out.println("sda9f1ads  " + rs.getString("nickNameUser"));
                 list.add(new AniSeries(str, rs.getString("seriesName"), rs.getString("seriesNote"), rs.getString("nicknameUser")));
             }
         } catch (SQLException e) {
@@ -135,8 +139,7 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
         idAniSeries.setCellValueFactory(new PropertyValueFactory<>("idAniSeries"));
         seriesName.setCellValueFactory(new PropertyValueFactory<>("seriesName"));
         seriesNote.setCellValueFactory(new PropertyValueFactory<>("seriesNote"));
-        //System.out.println();
-        nicknameUser.setCellValueFactory(new PropertyValueFactory<>("nicknameUser"));
+        user.setCellValueFactory(new PropertyValueFactory<>("user"));
         table.setItems(list);
     }
 
@@ -157,7 +160,7 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
     public void actionAddAnime() throws IOException {
         goPageAddAnime(dialogStage);
     }
-
+    
     @FXML
     private void actionBtnAllAnimes(ActionEvent event) throws ClassNotFoundException {
         lblAnimes.setText("Todos Animes");
@@ -197,7 +200,7 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
     }
 
     @FXML
-    private void actionYourAnime() {
+    private void actionYourAnime() throws SQLException {
         lblAnimes.setText("Seus animes");
         lblAnimes.setTextFill(AQUAMARINE);
         panelAllAnimes.setStyle("-fx-background-color: #d3d3d3;");
@@ -206,6 +209,11 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
         panelYourAnime.setStyle("-fx-background-color: #7fffd4;");
         btnFetchAnime.setVisible(false);
         txtSearchAnime.setVisible(false);
+        preparedStatement = getConnection().prepareStatement("CALL PROC_ANIME_USER_NOTE(?)");
+        System.out.println(userIdInferno);
+        preparedStatement.setString(1, userIdInferno);
+        ResultSet rs = preparedStatement.executeQuery();
+        getAni(rs);
     }
 
     @FXML

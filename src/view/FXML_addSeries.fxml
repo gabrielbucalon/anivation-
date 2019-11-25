@@ -27,7 +27,7 @@
       <TextArea fx:id="txtAnimeComment" layoutX="70.0" layoutY="461.0" prefHeight="86.0" prefWidth="461.0" promptText="Comentario" />
       <Button fx:id="btnAnimeSend" layoutX="471.0" layoutY="562.0" mnemonicParsing="false" onAction="#createOneAnime" prefHeight="27.0" prefWidth="63.0" style="-fx-background-color: linear-gradient(to right, #6441a5, #2a0845); -fx-border-radius: 50px;" />
       <Button fx:id="btnAnimeCancel" layoutX="388.0" layoutY="562.0" mnemonicParsing="false" onAction="#backToPage" prefHeight="27.0" prefWidth="74.0" style="-fx-background-color: linear-gradient(to right, #FF4500, #FF0000); -fx-border-radius: 50px;" />
-      <Button fx:id="btnClean" layoutX="70.0" layoutY="562.0" mnemonicParsing="false" onAction="#clearFields" prefHeight="27.0" prefWidth="63.0" style="-fx-background-color: linear-gradient(to right, #4682B4, #008080);" />
+      <Button fx:id="btnClean" layoutX="70.0" layoutY="562.0" mnemonicParsing="false" onAction="#clearFields" prefHeight="27.0" prefWidth="63.0" style="-fx-background-color: linear-gradient(to right, #6441a5, #2a0845); -fx-border-radius: 50px;" />
       <ComboBox fx:id="combNoteSeries" layoutX="70.0" layoutY="399.0" prefWidth="150.0" promptText="Nota" />
       <Label layoutX="81.0" layoutY="567.0" text="Limpar" textFill="WHITE">
          <font>

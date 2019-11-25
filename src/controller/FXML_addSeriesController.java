@@ -87,6 +87,25 @@ public class FXML_addSeriesController extends AnimeSeriesDAOImpl implements Init
                 );
         combNoteSeries.setItems(options);
     }
+    
+    private void getGenderAnime(){
+            ObservableList<String> options
+                = FXCollections.observableArrayList(
+                        "Shoujo",
+                        "Bishoujo",
+                        "Shounen",
+                        "Bishounen",
+                        "Kemono",
+                        "Mecha",
+                        "Ecchi",
+                        "Gender Blender",
+                        "Hentai",
+                        "Gore",
+                        "Aniparô",
+                        "Vida Escolar",
+                        "Harem"
+                );
+    }
 
     @FXML
     private void clearFields() {

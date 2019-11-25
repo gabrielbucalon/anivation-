@@ -6,6 +6,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -41,7 +43,7 @@
                         <TableColumn fx:id="idAniSeries" prefWidth="106.0" text="RANK" />
                         <TableColumn fx:id="seriesName" prefWidth="90.0" text="Titulo" />
                         <TableColumn fx:id="seriesNote" prefWidth="61.0" text="Nota" />
-                        <TableColumn fx:id="nicknameUser" prefWidth="106.0" text="Usuário" />
+                        <TableColumn fx:id="user" prefWidth="106.0" text="Usuário" />
                     </columns>
                 </TableView>
                 <Button ellipsisString="+" layoutX="480.0" layoutY="365.0" mnemonicParsing="false" onAction="#actionAddAnime" prefHeight="33.0" prefWidth="0.0" style="-fx-background-radius: 25px;" stylesheets="@../theme/style.css" text="+">
@@ -67,15 +69,21 @@
         </Label>
         <TextField fx:id="txtSearchAnime" layoutX="258.0" layoutY="152.0" visible="false" />
         <Button fx:id="btnFetchAnime" layoutX="420.0" layoutY="152.0" mnemonicParsing="false" onAction="#actionSearchAnime" text="Buscar anime" visible="false" />
-      <Label fx:id="lblWelcome" layoutX="300.0" layoutY="22.0" text="Bem vindo(a)," textFill="#6572bc">
+      <Label fx:id="lblWelcome" layoutX="214.0" layoutY="22.0" text="Bem vindo(a)," textFill="#6572bc">
          <font>
             <Font name="Segoe UI" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lblWelcomeNameUser" layoutX="446.0" layoutY="22.0" prefHeight="29.0" prefWidth="147.0" textFill="#6572bc">
+      <Label fx:id="lblWelcomeNameUser" layoutX="360.0" layoutY="22.0" prefHeight="29.0" prefWidth="147.0" textFill="#6572bc">
          <font>
             <Font name="Segoe UI" size="24.0" />
          </font>
       </Label>
+      <Button layoutX="511.0" layoutY="16.0" mnemonicParsing="false" onAction="#actionExitApp" prefHeight="41.0" prefWidth="87.0" style="-fx-background-color: #fff;" textFill="WHITE" />
+      <ImageView fitHeight="25.0" fitWidth="26.0" layoutX="543.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/logout.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>

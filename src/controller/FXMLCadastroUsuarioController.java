@@ -80,9 +80,9 @@ public class FXMLCadastroUsuarioController extends UserDAOImpl implements Initia
         User user = new User();
         user.setNome(txt_NomeCompleto.getText());
         user.setApelido(txt_Apelido.getText());
-        user.setData(txt_Email.getText());
-        user.setEmail(txt_senha.getText());
-        user.setSenha(drop_Data.getText());
+        user.setEmail(txt_Email.getText());
+        user.setSenha(txt_senha.getText());
+        user.setData(drop_Data.getText());
         boolean save = create("INSERT INTO aniUser(fullName, nicknameUser, email, password, birthDate) VALUES(?,?,?,?,?)", user);
         if (save) {
             messagesImpl.infoBox("Sucesso", "Cadastro realizado com sucesso", user.getNome() + "  Cadastro com sucesso" );
