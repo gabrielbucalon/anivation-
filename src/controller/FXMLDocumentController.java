@@ -76,7 +76,7 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
     Stage dialogStage = new Stage();
     Scene scene;
 
-    public static String userIdInferno;
+    public static String idUser;
     private static String nameUser;
 
     @Override
@@ -114,14 +114,14 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
     }
 
     public void setUser(User user) {
-        this.userIdInferno = user.getIdUser();
+        this.idUser = user.getIdUser();
         nameUser = user.getApelido();
     }
 
     @FXML
     public void onClickEvent() {
         AniSeries a = table.getSelectionModel().getSelectedItem();
-        messagesImpl.infoBox(null, "Informações do Anime/Mangá", "Nome anime : " + a.getSeriesName() + "\nNota do Anime : " + a.getSeriesNote() + "\nNota do " + a.getUser());
+        messagesImpl.infoBox(null, "Informações do Anime/Mangá", "Nome anime : " + a.getSeriesName() + "\nNota do Anime : " + a.getSeriesNote() + "\nNota do : " + a.getUser() + "\nSinopse : " + a.getSeriesSynopsis() + "\nGênero : " + a.getSeriesGenre());
     }
 
     public void getAni(ResultSet rs) {
@@ -130,7 +130,7 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
             int i = 1;
             while (rs.next()) {
                 String str = Integer.toString(i++);
-                list.add(new AniSeries(str, rs.getString("seriesName"), rs.getString("seriesNote"), rs.getString("nicknameUser")));
+                list.add(new AniSeries(str, rs.getString("seriesName"), rs.getString("seriesNote"), rs.getString("nicknameUser"), rs.getString("seriesGenre"), rs.getString("seriesSynopsis")));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -210,8 +210,8 @@ public class FXMLDocumentController extends AnimeSeriesDAOImpl implements Initia
         btnFetchAnime.setVisible(false);
         txtSearchAnime.setVisible(false);
         preparedStatement = getConnection().prepareStatement("CALL PROC_ANIME_USER_NOTE(?)");
-        System.out.println(userIdInferno);
-        preparedStatement.setString(1, userIdInferno);
+        System.out.println(idUser);
+        preparedStatement.setString(1, idUser);
         ResultSet rs = preparedStatement.executeQuery();
         getAni(rs);
     }

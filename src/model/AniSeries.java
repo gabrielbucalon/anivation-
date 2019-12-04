@@ -10,14 +10,18 @@ public class AniSeries {
     private String seriesName;
     private String seriesNote;
     private String user;
+    private String seriesGenre;
+    private String seriesSynopsis;
     
     public AniSeries(){}
 
-    public AniSeries(String idAniSeries, String seriesName, String seriesNote, String nicknameUser) {
+    public AniSeries(String idAniSeries, String seriesName, String seriesNote, String nicknameUser, String seriesGenre, String seriesSynopsis) {
         this.idAniSeries = idAniSeries;
         this.seriesName = seriesName;
         this.seriesNote = seriesNote;
         this.user = nicknameUser;
+        this.seriesGenre = seriesGenre;
+        this.seriesSynopsis = seriesSynopsis;
     }    
     
     public AniSeries(int i, String string, String string0) {
@@ -78,5 +82,33 @@ public class AniSeries {
      */
     public void setUser(String user) {
         this.user = user;
+    }
+
+    /**
+     * @return the seriesGenre
+     */
+    public String getSeriesGenre() {
+        return seriesGenre;
+    }
+
+    /**
+     * @param seriesGenre the seriesGenre to set
+     */
+    public void setSeriesGenre(String seriesGenre) {
+        this.seriesGenre = seriesGenre;
+    }
+
+    /**
+     * @return the seriesSynopsis
+     */
+    public String getSeriesSynopsis() {
+        return seriesSynopsis;
+    }
+
+    /**
+     * @param seriesSynopsis the seriesSynopsis to set
+     */
+    public void setSeriesSynopsis(String seriesSynopsis) {
+        this.seriesSynopsis = seriesSynopsis;
     }
 }

@@ -53,7 +53,7 @@ public class FXML_addSeriesController extends AnimeSeriesDAOImpl implements Init
         ani.setNameAimeSeries(txtAnimeName.getText());
         ani.setNote((String) combNoteSeries.getValue());
         ani.setSinopse(txtAnimeSynopsis.getText());
-        ani.setIdUser(FXMLDocumentController.userIdInferno);
+        ani.setIdUser(FXMLDocumentController.idUser);
         System.out.println("ani.getId" + ani.getIdUser());
         boolean save = createAnime("SELECT FUNC_REGISTER_SERIES(?, ?, ?, ?, ?, ?,?)", ani);
         if (save) {
